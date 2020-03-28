@@ -7,6 +7,7 @@ import java.time.Month;
 import java.time.Year;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import coursemanagerapi.models.enums.PaymentStatus;
+import coursemanagerapi.models.enums.PaymentStatusConverter;
+import coursemanagerapi.models.enums.YearConverter;
 import lombok.Data;
 
 @Entity
@@ -30,12 +33,14 @@ public class Payment implements Serializable {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "smallint")
 	private Month month;
 
+	@Convert(converter = YearConverter.class)
 	@Column(nullable = false)
 	private Year year;
 
+	@Convert(converter = PaymentStatusConverter.class)
 	@Column(name = "payment_status", nullable = false)
 	private PaymentStatus paymentStatus;
 
