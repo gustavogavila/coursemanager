@@ -1,9 +1,11 @@
 package coursemanagerapi.models.repositories;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import coursemanagerapi.models.entities.Enrollment;
 
-public interface EnrollmentRepository extends CrudRepository<Enrollment, Long> {
+@Repository
+public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 
 }
