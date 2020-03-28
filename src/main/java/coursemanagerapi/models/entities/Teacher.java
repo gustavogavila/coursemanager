@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "teacher")
+@NoArgsConstructor
 @Data
 public class Teacher implements Serializable {
 

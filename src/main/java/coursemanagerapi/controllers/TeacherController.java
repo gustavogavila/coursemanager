@@ -18,43 +18,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import coursemanagerapi.models.entities.Course;
-import coursemanagerapi.models.services.CourseService;
+import coursemanagerapi.models.entities.Teacher;
+import coursemanagerapi.models.services.TeacherService;
 
 @RestController
-@RequestMapping(value = "courses", produces = "application/json")
+@RequestMapping(value = "teachers", produces = "application/json")
 @CrossOrigin(origins = "*")
-public class CourseController {
+public class TeacherController {
 	
 	@Autowired
-	private CourseService service;
+	private TeacherService service;
 
 	@GetMapping
-	public List<Course> findAll() {
+	public List<Teacher> findAll() {
 		PageRequest page = PageRequest.of(0, 20, Sort.by("id").descending());
 		return service.findAll(page);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Course> findById(@PathVariable("id") Long id) {
-		Course course = service.findById(id);
-		if (course != null) {
-			return new ResponseEntity<>(course, HttpStatus.OK);
+	public ResponseEntity<Teacher> findById(@PathVariable("id") Long id) {
+		Teacher teacher = service.findById(id);
+		if (teacher != null) {
+			return new ResponseEntity<>(teacher, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Course save(@RequestBody Course course) {
-		return service.save(course);
+	public Teacher save(@RequestBody Teacher teacher) {
+		return service.save(teacher);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Course update(@PathVariable("id") Long id, @RequestBody Course course) {
-		course.setId(id);
-		return service.update(course);
+	public Teacher update(@PathVariable("id") Long id, @RequestBody Teacher teacher) {
+		teacher.setId(id);
+		return service.update(teacher);
 //		return courseRepo.findById(id).map(c -> {
 //			c.setName(course.getName());
 //			c.setDescription(course.getDescription());
