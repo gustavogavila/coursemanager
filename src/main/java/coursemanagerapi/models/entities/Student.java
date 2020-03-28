@@ -1,4 +1,4 @@
-package coursemanagerapi.models;
+package coursemanagerapi.models.entities;
 
 import java.io.Serializable;
 
@@ -12,9 +12,9 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "course")
+@Table(name = "student")
 @Data
-public class Course implements Serializable {
+public class Student implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,6 +26,9 @@ public class Course implements Serializable {
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	@Column(name = "description")
-	private String description;
+	@Column(name = "email", nullable = false)
+	private String email;
+
+	@Column(name = "phone", nullable = false)
+	private String phone;
 }

@@ -1,8 +1,10 @@
-package coursemanagerapi.models;
+package coursemanagerapi.models.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.Year;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import coursemanagerapi.models.enums.PaymentStatus;
 import lombok.Data;
 
 @Entity
@@ -28,17 +31,24 @@ public class Payment implements Serializable {
 	private Long id;
 
 	@Column(nullable = false)
-	private LocalDateTime date;
+	private Month month;
 
 	@Column(nullable = false)
-	private BigDecimal amount;
-	
-	@ManyToOne
-	@JoinColumn(name = "course_id", nullable = false)
-	private Course course;
-	
-	@ManyToOne
-	@JoinColumn(name = "student_id", nullable = false)
-	private Student student;
+	private Year year;
 
+	@Column(name = "payment_status", nullable = false)
+	private PaymentStatus paymentStatus;
+
+	@Column(name = "amount_paid", nullable = false)
+	private BigDecimal amountPaid;
+
+	@Column(name = "pay_date", nullable = false)
+	private LocalDateTime payDate;
+
+	@Column(name = "expiration_date", nullable = false)
+	private LocalDateTime expirationDate;
+
+	@ManyToOne
+	@JoinColumn(name = "enrollment_id", nullable = false)
+	private Enrollment enrollment;
 }

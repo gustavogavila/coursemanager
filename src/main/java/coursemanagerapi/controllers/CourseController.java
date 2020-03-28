@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import coursemanagerapi.models.Course;
-import coursemanagerapi.repositories.CourseRepository;
+import coursemanagerapi.models.entities.Course;
+import coursemanagerapi.models.repositories.CourseRepository;
 
 @RestController
 @RequestMapping(value = "courses", produces = "application/json")

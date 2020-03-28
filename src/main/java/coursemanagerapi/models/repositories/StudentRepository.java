@@ -1,8 +1,8 @@
-package coursemanagerapi.repositories;
+package coursemanagerapi.models.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import coursemanagerapi.models.Student;
+import coursemanagerapi.models.entities.Student;
 
 public interface StudentRepository extends CrudRepository<Student, Long>{
 
