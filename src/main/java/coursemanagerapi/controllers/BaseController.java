@@ -19,15 +19,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import coursemanagerapi.models.dtos.TeacherDTO;
 import coursemanagerapi.models.services.BaseService;
 
 @CrossOrigin
 @SuppressWarnings(value = { "rawtypes", "unchecked" })
-public abstract class BaseController<E, D, S extends BaseService> {
+public abstract class BaseController<E, S extends BaseService> {
 
 	@Autowired
-	private S service;
+	protected S service;
 
 	@GetMapping("/{id}")
 	public ResponseEntity<E> findById(@PathVariable("id") Long id) {
@@ -35,18 +34,16 @@ public abstract class BaseController<E, D, S extends BaseService> {
 		return ResponseEntity.ok().body(entity);
 	}
 
-	@PostMapping(consumes = "application/json")
-	public ResponseEntity<E> save(@Valid @RequestBody D objDTO) {
-		E obj = (E) service.fromDTO(objDTO);
-		obj = (E) service.save(obj);
-		return ResponseEntity.status(HttpStatus.CREATED).body(obj);
+	@PostMapping
+	public ResponseEntity<E> save(@Valid @RequestBody E entity) {
+		entity = (E) service.save(entity);
+		return ResponseEntity.status(HttpStatus.CREATED).body(entity);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<E> update(@Valid @RequestBody TeacherDTO objDTO, @PathVariable("id") Long id) {
-		E obj = (E) service.fromDTO(objDTO);
-		obj = (E) service.update(obj, id);
-		return ResponseEntity.ok(obj);
+	public ResponseEntity<E> update(@Valid @RequestBody E entity, @PathVariable("id") Long id) {
+		entity = (E) service.update(entity, id);
+		return ResponseEntity.ok(entity);
 	}
 
 	@DeleteMapping("/{id}")

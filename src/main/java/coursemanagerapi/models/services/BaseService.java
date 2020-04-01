@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import coursemanagerapi.models.exceptions.ObjectNotFoundException;
 
-public abstract class BaseService<E, D, T, R extends JpaRepository<E, T>> {
+public abstract class BaseService<E, T, R extends JpaRepository<E, T>> {
 
 	@Autowired
 	protected R repo;
@@ -45,7 +45,5 @@ public abstract class BaseService<E, D, T, R extends JpaRepository<E, T>> {
 	public Page<E> findPage(@RequestParam Map<String, String> queryString, Pageable pageable) {
 		return repo.findAll(pageable);
 	}
-
-	public abstract E fromDTO(D objDTO);
 
 }
