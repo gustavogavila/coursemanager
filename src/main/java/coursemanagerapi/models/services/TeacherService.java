@@ -7,7 +7,7 @@ import coursemanagerapi.models.dtos.TeacherDTO;
 import coursemanagerapi.models.entities.Teacher;
 
 @Service
-public class TeacherService extends BaseService<Teacher, Long, JpaRepository<Teacher,Long>> {
+public class TeacherService extends BaseService<Teacher, TeacherDTO, Long, JpaRepository<Teacher,Long>> {
 
 	public Teacher fromDTO(TeacherDTO dto) {
 		return new Teacher(dto.getId(), dto.getName(), dto.getEmail(), dto.getPhone());
