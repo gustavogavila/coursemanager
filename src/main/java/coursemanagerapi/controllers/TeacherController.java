@@ -1,5 +1,6 @@
 package coursemanagerapi.controllers;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import coursemanagerapi.models.entities.Teacher;
 import coursemanagerapi.models.services.TeacherService;
@@ -29,12 +31,6 @@ public class TeacherController {
 	@Autowired
 	private TeacherService service;
 
-	@GetMapping
-	public List<Teacher> findAll() {
-		PageRequest page = PageRequest.of(0, 20, Sort.by("id").descending());
-		return service.findAll(page);
-	}
-
 	@GetMapping("/{id}")
 	public ResponseEntity<Teacher> findById(@PathVariable("id") Long id) {
 		Teacher teacher = service.findById(id);
@@ -42,26 +38,30 @@ public class TeacherController {
 	}
 
 	@PostMapping(consumes = "application/json")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Teacher save(@RequestBody Teacher teacher) {
-		return service.save(teacher);
+	public ResponseEntity<Void> save(@RequestBody Teacher teacher) {
+		Teacher obj = service.save(teacher);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
-
+	
 	@PutMapping("/{id}")
-	@ResponseStatus(HttpStatus.OK)
-	public Teacher update(@PathVariable("id") Long id, @RequestBody Teacher teacher) {
+	public ResponseEntity<Void> update(@RequestBody Teacher teacher, @PathVariable("id") Long id) {
 		teacher.setId(id);
-		return service.update(teacher);
-//		return courseRepo.findById(id).map(c -> {
-//			c.setName(course.getName());
-//			c.setDescription(course.getDescription());
-//			return courseRepo.save(c);
-//		}).orElseGet(() -> {
-//			course.setId(id);
-//			return courseRepo.save(course);
-//		});		
+		teacher = service.update(teacher, id);
+		return ResponseEntity.noContent().build();
 	}
 
+	
+	
+	
+	@GetMapping
+	public ResponseEntity<List<Teacher>> findAll() {
+		PageRequest page = PageRequest.of(0, 20, Sort.by("id").descending());
+		List<Teacher> list = service.findAll(page);
+		return ResponseEntity.ok().body(list);
+	}
+
+	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {

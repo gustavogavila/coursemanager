@@ -28,7 +28,8 @@ public abstract class BaseService<E, T, R extends JpaRepository<E, T>> {
 		return repo.save(entity);
 	}
 	
-	public E update(E entity) {
+	public E update(E entity, T id) {
+		findById(id);
 		return repo.save(entity);
 	}
 	

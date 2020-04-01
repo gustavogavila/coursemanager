@@ -54,15 +54,7 @@ public class CourseController {
 	@ResponseStatus(HttpStatus.OK)
 	public Course update(@PathVariable("id") Long id, @RequestBody Course course) {
 		course.setId(id);
-		return service.update(course);
-//		return courseRepo.findById(id).map(c -> {
-//			c.setName(course.getName());
-//			c.setDescription(course.getDescription());
-//			return courseRepo.save(c);
-//		}).orElseGet(() -> {
-//			course.setId(id);
-//			return courseRepo.save(course);
-//		});		
+		return service.update(course, id);
 	}
 
 	@DeleteMapping("/{id}")
