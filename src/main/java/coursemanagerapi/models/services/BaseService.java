@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import coursemanagerapi.models.exceptions.ObjectNotFoundException;
@@ -33,8 +35,13 @@ public abstract class BaseService<E, T, R extends JpaRepository<E, T>> {
 		repo.deleteById(id);
 	}
 	
-	public List<E> findAll(PageRequest page) {
-		return repo.findAll(page).getContent();
+	public List<E> findAll() {
+		return repo.findAll();
+	}
+	
+	public Page<E> findPage(Integer page, Integer linesPerPage, String direction, String orderBy) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repo.findAll(pageRequest);
 	}
 	
 }
