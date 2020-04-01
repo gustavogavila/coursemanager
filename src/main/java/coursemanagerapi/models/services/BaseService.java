@@ -8,6 +8,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import coursemanagerapi.models.exceptions.ObjectNotFoundException;
+
 public abstract class BaseService<E, T, R extends JpaRepository<E, T>> {
 	
 	@Autowired
@@ -19,7 +21,7 @@ public abstract class BaseService<E, T, R extends JpaRepository<E, T>> {
 	
 	public E findById(T id) {
 		Optional<E> opt = repo.findById(id);
-		return opt.orElse(null);
+		return opt.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
 	}
 	
 	public E save(E entity) {

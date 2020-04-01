@@ -25,7 +25,7 @@ import coursemanagerapi.models.services.TeacherService;
 @RequestMapping(value = "teachers", produces = "application/json")
 @CrossOrigin(origins = "*")
 public class TeacherController {
-	
+
 	@Autowired
 	private TeacherService service;
 
@@ -38,10 +38,7 @@ public class TeacherController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Teacher> findById(@PathVariable("id") Long id) {
 		Teacher teacher = service.findById(id);
-		if (teacher != null) {
-			return new ResponseEntity<>(teacher, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		return ResponseEntity.ok().body(teacher);
 	}
 
 	@PostMapping(consumes = "application/json")
