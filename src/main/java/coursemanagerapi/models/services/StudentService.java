@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import coursemanagerapi.models.entities.Student;
 
 @Service
-public class StudentService extends BaseService<Student, Long, JpaRepository<Student,Long>> {
-	
-	
+public class StudentService extends BaseService<Student, Long, JpaRepository<Student, Long>> {
+
 }

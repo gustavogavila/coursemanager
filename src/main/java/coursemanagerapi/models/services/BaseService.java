@@ -3,6 +3,7 @@ package coursemanagerapi.models.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,8 +27,9 @@ public abstract class BaseService<E, T, R extends JpaRepository<E, T>> {
 	}
 	
 	public E update(E entity, T id) {
-		findById(id);
-		return repo.save(entity);
+		E existingEntity = findById(id);
+		BeanUtils.copyProperties(entity, existingEntity, "id");
+		return repo.save(existingEntity);
 	}
 	
 	public void delete(T id) {

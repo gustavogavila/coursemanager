@@ -12,4 +12,5 @@ public class TeacherService extends BaseService<Teacher, Long, JpaRepository<Tea
 	public Teacher fromDTO(TeacherDTO dto) {
 		return new Teacher(dto.getId(), dto.getName(), dto.getEmail(), dto.getPhone());
 	}
+
 }
