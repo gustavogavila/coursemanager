@@ -1,5 +1,6 @@
 package coursemanagerapi.models.services;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,6 +26,10 @@ public abstract class BaseService<E, T, R extends JpaRepository<E, T>> {
 
 	public E save(E entity) {
 		return repo.save(entity);
+	}
+	
+	public Collection<E> saveAll(Collection<E> entityList) {
+		return repo.saveAll(entityList);
 	}
 
 	public E update(E entity, T id) {

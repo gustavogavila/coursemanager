@@ -37,6 +37,7 @@ public abstract class BaseController<E, S extends BaseService> {
 	@PostMapping
 	public ResponseEntity<E> save(@Valid @RequestBody E entity) {
 		entity = (E) service.save(entity);
+		entity = afterSave(entity);
 		return ResponseEntity.status(HttpStatus.CREATED).body(entity);
 	}
 
@@ -62,6 +63,10 @@ public abstract class BaseController<E, S extends BaseService> {
 	public ResponseEntity<Page<E>> findPage(@RequestParam Map<String, String> queryString, Pageable pageable) {
 		Page<E> list = service.findPage(queryString, pageable);
 		return list.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok().body(list);
+	}
+	
+	protected E afterSave(E entity) {
+		return entity;
 	}
 
 }

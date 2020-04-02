@@ -16,14 +16,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import coursemanagerapi.models.enums.MonthConverter;
 import coursemanagerapi.models.enums.PaymentStatus;
 import coursemanagerapi.models.enums.PaymentStatusConverter;
 import coursemanagerapi.models.enums.YearConverter;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name = "payment")
 @Data
+@AllArgsConstructor
 public class Payment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,7 +36,7 @@ public class Payment implements Serializable {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	@Column(columnDefinition = "smallint")
+	@Convert(converter = MonthConverter.class)
 	private Month month;
 
 	@Convert(converter = YearConverter.class)
