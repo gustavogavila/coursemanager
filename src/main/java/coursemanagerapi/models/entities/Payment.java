@@ -33,24 +33,23 @@ public class Payment implements Serializable {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	@Column(nullable = false, columnDefinition = "smallint")
+	@Column(columnDefinition = "smallint")
 	private Month month;
 
 	@Convert(converter = YearConverter.class)
-	@Column(nullable = false)
 	private Year year;
 
 	@Convert(converter = PaymentStatusConverter.class)
-	@Column(name = "payment_status", nullable = false)
-	private PaymentStatus paymentStatus;
+	@Column(name = "payment_status")
+	private PaymentStatus paymentStatus = PaymentStatus.PENDING;
 
-	@Column(name = "amount_paid", nullable = false)
+	@Column(name = "amount_paid")
 	private BigDecimal amountPaid;
 
-	@Column(name = "pay_date", nullable = false)
+	@Column(name = "pay_date")
 	private LocalDateTime payDate;
 
-	@Column(name = "expiration_date", nullable = false)
+	@Column(name = "expiration_date")
 	private LocalDateTime expirationDate;
 
 	@ManyToOne

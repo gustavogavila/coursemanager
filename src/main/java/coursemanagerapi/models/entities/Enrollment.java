@@ -26,8 +26,7 @@ public class Enrollment implements Serializable {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	@Column(nullable = false)
-	private LocalDateTime date;
+	private LocalDateTime date = LocalDateTime.now();
 	
 	@ManyToOne
 	@JoinColumn(name = "course_id", nullable = false)
