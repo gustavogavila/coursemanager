@@ -3,16 +3,17 @@ package coursemanagerapi.models.services;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Year;
+import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import coursemanagerapi.models.entities.Enrollment;
 import coursemanagerapi.models.entities.Payment;
 import coursemanagerapi.models.enums.PaymentStatus;
+import coursemanagerapi.models.repositories.PaymentRepository;
 
 @Service
-public class PaymentService extends BaseService<Payment, Long, JpaRepository<Payment, Long>> {
+public class PaymentService extends BaseService<Payment, Long, PaymentRepository> {
 
 	public void buildMonthlyPayments(Enrollment enrollment) {
 
@@ -39,4 +40,9 @@ public class PaymentService extends BaseService<Payment, Long, JpaRepository<Pay
 		}
 
 	}
+
+	public List<Payment> getAllPaymentsWithEnrollment() {
+		return repo.getAllPaymentsWithEnrollment();
+	}
+	
 }

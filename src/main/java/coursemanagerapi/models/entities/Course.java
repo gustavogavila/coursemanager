@@ -1,6 +1,7 @@
 package coursemanagerapi.models.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,6 +38,10 @@ public class Course implements Serializable {
 	@Length(min = 5, max = 200, message = "O tamanho deve ser entre 5 e 200 caracteres")
 	@Column(name = "description")
 	private String description;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Column(name = "price", nullable = false)
+	private BigDecimal price;
 
 	@ManyToOne
 	@JoinColumn(name = "teacher_id", referencedColumnName = "id", nullable = false)
