@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -60,8 +59,8 @@ public abstract class BaseController<E, S extends BaseService> {
 	}
 
 	@GetMapping("/page")
-	public ResponseEntity<Page<E>> findPage(@RequestParam Map<String, String> queryString, Pageable pageable) {
-		Page<E> list = service.findPage(queryString, pageable);
+	public ResponseEntity<Page<E>> findPage(@RequestParam Map<String, String> queryString) {
+		Page<E> list = service.findPage(queryString);
 		return list.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok().body(list);
 	}
 	

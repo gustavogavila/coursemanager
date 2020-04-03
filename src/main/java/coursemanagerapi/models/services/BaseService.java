@@ -8,7 +8,8 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,7 +48,14 @@ public abstract class BaseService<E, T, R extends JpaRepository<E, T>> {
 		return repo.findAll();
 	}
 
-	public Page<E> findPage(@RequestParam Map<String, String> queryString, Pageable pageable) {
+	public Page<E> findPage(@RequestParam Map<String, String> queryString) {
+		Integer page = queryString.get("page") != null ? Integer.valueOf(queryString.get("page")) : 0;
+		Integer linesPerPage = queryString.get("linesPerPage") != null ? Integer.valueOf(queryString.get("linesPerPage")) : 24;
+		String direction = queryString.get("direction") != null ? queryString.get("direction") : "DESC";
+		String orderBy = queryString.get("orderBy") != null ? queryString.get("orderBy") : "id";
+		
+		PageRequest pageable = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
 		return repo.findAll(pageable);
 	}
 
