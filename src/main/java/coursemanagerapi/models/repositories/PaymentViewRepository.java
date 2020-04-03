@@ -3,10 +3,10 @@ package coursemanagerapi.models.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import coursemanagerapi.models.entities.Payment;
+import coursemanagerapi.models.entities.PaymentView;
 
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, Long> {
+public interface PaymentViewRepository extends JpaRepository<PaymentView, Long> {
 
 //	@Query(value = "SELECT\n" + 
 //					"p.id,\n" + 
