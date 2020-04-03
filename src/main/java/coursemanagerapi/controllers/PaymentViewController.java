@@ -10,12 +10,4 @@ import coursemanagerapi.models.services.PaymentViewService;
 @RequestMapping(value = "paymentsview")
 public class PaymentViewController extends BaseController<PaymentView, PaymentViewService> {
 
-//	@Autowired
-//	private PaymentViewService paymentViewService;
-//	
-//	@Override
-//	public ResponseEntity<List<PaymentView>> findAll() {
-//		List<PaymentView> list = paymentViewService.getAllPaymentsWithEnrollment();
-//		return list.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok().body(list);
-//	}
 }

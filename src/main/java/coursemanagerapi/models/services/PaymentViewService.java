@@ -7,12 +7,5 @@ import coursemanagerapi.models.repositories.PaymentViewRepository;
 
 @Service
 public class PaymentViewService extends BaseService<PaymentView, Long, PaymentViewRepository> {
-	
-//	@Autowired
-//	private PaymentViewRepository paymentViewRepository;
-//
-//	public List<PaymentView> getAllPaymentsWithEnrollment() {
-//		return paymentViewRepository.getAllPaymentsWithEnrollment();
-//	}
-	
+
 }
