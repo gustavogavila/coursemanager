@@ -40,5 +40,16 @@ public class PaymentService extends BaseService<Payment, Long, PaymentRepository
 		}
 
 	}
+	
+	@Override
+	public Payment update(Payment entity, Long id) {
+		Payment existingEntity = findById(id);
+		
+		existingEntity.setAmountPaid(entity.getAmountPaid());
+		existingEntity.setPayDate(LocalDateTime.now());
+		existingEntity.setPaymentStatus(PaymentStatus.PAID);
+		
+		return repo.save(existingEntity);
+	}
 
 }
