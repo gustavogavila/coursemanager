@@ -11,7 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SearchCriteria {
 	private String key;
-	private String operation;
+	private SearchOperation operation;
 	private Object value;
-
 }
