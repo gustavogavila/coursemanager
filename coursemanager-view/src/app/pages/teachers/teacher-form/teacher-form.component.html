@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<form [formGroup]="teacherForm" (submit)="submitForm()">
+<form [formGroup]="resourceForm" (submit)="submitForm()">
   <div class="card">
     <div class="card-header">Formulário</div>
     <div class="card-body">
@@ -33,16 +33,16 @@
           <div
             class="text-danger"
             *ngIf="
-              teacherForm.get('name').invalid && teacherForm.get('name').touched
+              resourceForm.get('name').invalid && resourceForm.get('name').touched
             "
           >
-            <div *ngIf="teacherForm.get('name').errors.required">
+            <div *ngIf="resourceForm.get('name').errors.required">
               dado obrigatório
             </div>
-            <div *ngIf="teacherForm.get('name').errors.minlength">
+            <div *ngIf="resourceForm.get('name').errors.minlength">
               deve ter, no mínimo, 2 caracteres
             </div>
-            <div *ngIf="teacherForm.get('name').errors.maxlength">
+            <div *ngIf="resourceForm.get('name').errors.maxlength">
               deve ter, no máximo, 200 caracteres
             </div>
           </div>
@@ -60,14 +60,14 @@
           <div
             class="text-danger"
             *ngIf="
-              teacherForm.get('email').invalid &&
-              teacherForm.get('email').touched
+              resourceForm.get('email').invalid &&
+              resourceForm.get('email').touched
             "
           >
-            <div *ngIf="teacherForm.get('email').errors.required">
+            <div *ngIf="resourceForm.get('email').errors.required">
               dado obrigatório
             </div>
-            <div *ngIf="teacherForm.get('email').errors.email">
+            <div *ngIf="resourceForm.get('email').errors.email">
               e-mail inválido
             </div>
           </div>
@@ -93,7 +93,7 @@
   </div>
 
   <button
-    [disabled]="submittingForm || teacherForm.invalid"
+    [disabled]="submittingForm || resourceForm.invalid"
     class="btn btn-primary btn-lg float-right mt-3"
   >
     Salvar
