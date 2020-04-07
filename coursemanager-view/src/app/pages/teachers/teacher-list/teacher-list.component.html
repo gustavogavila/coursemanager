@@ -26,14 +26,26 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let teacher of teachers">
+    <tr *ngFor="let resource of resources">
       <td>
-        <strong>{{teacher.name}}</strong><br/>
-        <small>Email: {{teacher.email}} | Contato: {{teacher.phone}}</small>
+        <strong>{{ resource.name }}</strong
+        ><br />
+        <small
+          >Email: {{ resource.email }} | Contato: {{ resource.phone }}</small
+        >
       </td>
       <td>
-        <a [routerLink]="[teacher.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
-        <button (click)="deleteTeacher(teacher.id)" class="btn btn-outline-danger btn-sm">Excluir</button>
+        <a
+          [routerLink]="[resource.id, 'edit']"
+          class="btn btn-outline-info btn-sm mr-2"
+          >Editar</a
+        >
+        <button
+          (click)="deleteResource(resource.id)"
+          class="btn btn-outline-danger btn-sm"
+        >
+          Excluir
+        </button>
       </td>
     </tr>
   </tbody>

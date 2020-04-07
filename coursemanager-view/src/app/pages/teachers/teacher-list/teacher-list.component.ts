@@ -1,36 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-
-import { TeacherService } from '../shared/teacher.service';
+import { Component } from '@angular/core';
+import { BaseResourceListComponent } from 'src/app/shared/components/base-resource-list.component';
 import { Teacher } from '../shared/teacher.model';
+import { TeacherService } from '../shared/teacher.service';
 
 @Component({
   selector: 'app-teacher-list',
   templateUrl: './teacher-list.component.html',
-  styleUrls: ['./teacher-list.component.css']
+  styleUrls: ['./teacher-list.component.css'],
 })
-export class TeacherListComponent implements OnInit {
+export class TeacherListComponent extends BaseResourceListComponent<Teacher> {
 
-  teachers: Teacher[] = [];
-
-  constructor(private teacherService: TeacherService) { }
-
-  ngOnInit(): void {
-    this.teacherService.findAll().subscribe(
-      teachers => this.teachers = teachers,
-      () => alert('Erro ao carregar a lista'),
-    );
+  constructor(protected teacherService: TeacherService) {
+    super(teacherService);
   }
-
-  deleteTeacher(id: number) {
-    const confirmDelete = confirm('Deseja realmente excluir este item?');
-
-    if (confirmDelete) {
-      this.teacherService.deleteById(id).subscribe(
-        () => this.teachers = this.teachers.filter(t => t.id != id),
-        () => alert('Erro ao remover registro'),
-        );
-    }
-  }
-
-
 }

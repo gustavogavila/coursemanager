@@ -40,7 +40,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     this.setPageTitle();
   }
 
-  submitForm() {
+  submitForm = (): void => {
     this.submittingForm = true;
     if (this.currentAction === 'new') {
       this.saveResource();
@@ -76,7 +76,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     }
   };
 
-  protected setPageTitle() {
+  protected setPageTitle = (): void => {
     this.pageTitle =
       this.currentAction === 'new'
         ? this.creationPageTitle()
@@ -87,7 +87,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
 
   protected editionPageTitle = (): string => 'Edição';
 
-  protected saveResource = () => {
+  protected saveResource = (): void => {
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
 
     this.resourceService.save(resource).subscribe(
@@ -96,7 +96,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     );
   };
 
-  protected updateResource = () => {
+  protected updateResource = (): void => {
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
 
     this.resourceService.update(resource).subscribe(
@@ -117,7 +117,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
       );
   };
 
-  protected actionsForError(error: any): void {
+  protected actionsForError = (error: any): void => {
     toastr.error('Ocorreu um erro ao processar sua solicitação.');
 
     this.submittingForm = false;
