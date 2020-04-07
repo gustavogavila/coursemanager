@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Teacher } from '../shared/teacher.model';
 import { TeacherService } from '../shared/teacher.service';
-
 import toastr from 'toastr';
 
 @Component({
@@ -38,36 +37,46 @@ export class TeacherFormComponent implements OnInit, AfterContentChecked {
     this.setPageTitle();
   }
 
-
   submitForm() {
     this.submittingForm = true;
-    if (this.currentAction = 'new') {
+    if (this.currentAction === 'new') {
       this.saveTeacher();
     } else {
       this.updateTeacher();
     }
   }
 
-
   // Private Methods
 
   private saveTeacher() {
-    const teacher = Object.assign(new Teacher(), this.teacherForm.value);
+    const teacher: Teacher = Object.assign(
+      new Teacher(),
+      this.teacherForm.value
+    );
 
     this.teacherService.save(teacher).subscribe(
-      teacher => this.actionsForSuccess(teacher),
-      error => this.actionsForError(error)
+      (teacher) => this.actionsForSuccess(teacher),
+      (error) => this.actionsForError(error)
     );
   }
 
   private updateTeacher() {
-    this.teacherService.update(this.teacherForm.value);
+    const teacher: Teacher = Object.assign(
+      new Teacher(),
+      this.teacherForm.value
+    );
+
+    this.teacherService.update(teacher).subscribe(
+      (teacher) => this.actionsForSuccess(teacher),
+      (error) => this.actionsForError(error)
+    );
   }
 
   private actionsForSuccess(teacher: Teacher): void {
     toastr.success('Dados salvos com sucesso!');
-    this.router.navigateByUrl('teachers', { skipLocationChange: true })
-      .then(() => this.router.navigate(['teachers', teacher.id, 'edit']))
+    this.router
+      .navigateByUrl('teachers', { skipLocationChange: true })
+      .then(() => this.router.navigate(['teachers', teacher.id, 'edit']));
   }
 
   private actionsForError(error: any): void {
@@ -78,7 +87,9 @@ export class TeacherFormComponent implements OnInit, AfterContentChecked {
     if (error.status === 422) {
       this.serverErrorMessages = JSON.parse(error._body).errors;
     } else {
-      this.serverErrorMessages = ['Falha na comunicação com o servidor. Tente novamente mais tarde.'];
+      this.serverErrorMessages = [
+        'Falha na comunicação com o servidor. Tente novamente mais tarde.',
+      ];
     }
   }
 
@@ -92,11 +103,13 @@ export class TeacherFormComponent implements OnInit, AfterContentChecked {
       id: [null],
       name: [
         null,
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(200),
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(200),
+        ],
       ],
-      email: [null, Validators.required, Validators.email],
+      email: [null, [Validators.required, Validators.email]],
       phone: [null],
     });
   }
@@ -111,7 +124,6 @@ export class TeacherFormComponent implements OnInit, AfterContentChecked {
           (teacher) => {
             this.teacher = teacher;
             this.teacherForm.patchValue(teacher);
-            console.log(this.teacherForm)
           },
           () => alert('Ocorreu um erro no servidor, tente mais tarde.')
         );
@@ -122,7 +134,7 @@ export class TeacherFormComponent implements OnInit, AfterContentChecked {
     const teacherName = this.teacher?.name || '';
     this.pageTitle =
       this.currentAction === 'new'
-        ? 'Cadastro de Novo Professor'
-        : `Editando professor ${teacherName}`;
+        ? 'Cadastro de novo professor'
+        : `Editando ${teacherName}`;
   }
 }
