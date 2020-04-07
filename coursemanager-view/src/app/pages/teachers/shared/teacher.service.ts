@@ -53,13 +53,11 @@ export class TeacherService {
   }
 
   private jsonDataToTeachers(jsonData: any[]): Teacher[] {
-    const teachers: Teacher[] = [];
-    jsonData.forEach(element => teachers.push(element as Teacher))
-    return teachers;
+    return jsonData.map(element => Object.assign(new Teacher(), element))
   }
 
   private jsonDataToTeacher(jsonData: any): Teacher {
-    return jsonData as Teacher;
+    return Object.assign(new Teacher(), jsonData);
   }
 
   private handleError(error: any): Observable<any> {
