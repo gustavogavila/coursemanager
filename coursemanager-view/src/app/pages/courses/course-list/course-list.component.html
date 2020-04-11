@@ -1,15 +1,15 @@
 <app-breadcrumb [items]="[{ label: 'Professores' }]"></app-breadcrumb>
 
 <app-page-title
-  title="Professores"
+  title="Cursos"
   btnText="+ Novo"
   btnLink="new"
-  btnStyle="success"
-></app-page-title>
+  btnStyle="success">
+</app-page-title>
 
-<app-table-list title="Professor"
+<app-table-list title="Curso"
   [resources]="resources"
   [mainField]="{label: 'Nome', value: 'name'}"
-  [otherFields]="[{label: 'E-mail', value: 'email'}, {label: 'Telefone', value: 'phone'}]"
+  [otherFields]="[{label: 'Descrição', value: 'description'}, {label: 'Preço', value: 'price'}]"
   (deleteEvent)="deleteResource($event)"
 ></app-table-list>
