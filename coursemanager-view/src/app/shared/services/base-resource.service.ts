@@ -5,14 +5,13 @@ import { catchError, map } from 'rxjs/operators';
 import { BaseResourceModel } from '../models/base-resource.model';
 
 export abstract class BaseResourceService<T extends BaseResourceModel> {
-
   protected http: HttpClient;
   protected apiPath: string;
 
   constructor(
     protected endpoint: string,
     protected injector: Injector,
-    protected jsonDataToResourceFn: (jsonData: any) => T
+    protected jsonDataToResourceFn: (jsonData: any) => T,
   ) {
     this.http = injector.get(HttpClient);
     this.apiPath = `http://localhost:8080/${this.endpoint}`;
@@ -48,7 +47,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     const url = `${this.apiPath}/${id}`;
     return this.http.delete(url).pipe(
       map(() => null),
-      catchError(this.handleError)
+      catchError(this.handleError),
     );
   };
 

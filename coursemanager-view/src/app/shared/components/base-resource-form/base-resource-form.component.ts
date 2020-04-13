@@ -13,7 +13,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
   resourceForm: FormGroup;
   pageTitle: string;
   serverErrorMessages: string[] = null;
-  submittingForm: boolean = false;
+  submittingForm = false;
 
   protected route: ActivatedRoute;
   protected router: Router;
@@ -23,7 +23,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     protected injector: Injector,
     protected resource: T,
     protected resourceService: BaseResourceService<T>,
-    protected jsonDataToResourceFn: (jsonData: any) => T
+    protected jsonDataToResourceFn: (jsonData: any) => T,
   ) {
     this.route = this.injector.get(ActivatedRoute);
     this.router = this.injector.get(Router);
@@ -47,7 +47,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     } else {
       this.updateResource();
     }
-  }
+  };
 
   // Protected Methods
 
@@ -62,16 +62,14 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     if (this.currentAction === 'edit') {
       this.route.paramMap
         .pipe(
-          switchMap((params) =>
-            this.resourceService.findById(+params.get('id'))
-          )
+          switchMap(params => this.resourceService.findById(+params.get('id'))),
         )
         .subscribe(
-          (resource) => {
+          resource => {
             this.resource = resource;
             this.resourceForm.patchValue(resource);
           },
-          () => alert('Ocorreu um erro no servidor, tente mais tarde.')
+          () => alert('Ocorreu um erro no servidor, tente mais tarde.'),
         );
     }
   };
@@ -81,7 +79,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
       this.currentAction === 'new'
         ? this.creationPageTitle()
         : this.editionPageTitle();
-  }
+  };
 
   protected creationPageTitle = (): string => 'Novo';
 
@@ -91,8 +89,8 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
 
     this.resourceService.save(resource).subscribe(
-      (resource) => this.actionsForSuccess(resource),
-      (error) => this.actionsForError(error)
+      r => this.actionsForSuccess(r),
+      error => this.actionsForError(error),
     );
   };
 
@@ -100,8 +98,8 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
 
     this.resourceService.update(resource).subscribe(
-      (resource) => this.actionsForSuccess(resource),
-      (error) => this.actionsForError(error)
+      r => this.actionsForSuccess(r),
+      error => this.actionsForError(error),
     );
   };
 
@@ -113,7 +111,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     this.router
       .navigateByUrl(baseComponentPath, { skipLocationChange: true })
       .then(() =>
-        this.router.navigate([baseComponentPath, resource.id, 'edit'])
+        this.router.navigate([baseComponentPath, resource.id, 'edit']),
       );
   };
 
@@ -129,5 +127,5 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
         'Falha na comunicação com o servidor. Tente novamente mais tarde.',
       ];
     }
-  }
+  };
 }
