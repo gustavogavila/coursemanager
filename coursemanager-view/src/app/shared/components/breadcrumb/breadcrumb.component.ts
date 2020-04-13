@@ -8,17 +8,15 @@ interface BreadcrumbItem {
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
-  styleUrls: ['./breadcrumb.component.css']
+  styleUrls: ['./breadcrumb.component.css'],
 })
 export class BreadcrumbComponent implements OnInit {
-
   @Input()
   items: BreadcrumbItem[] = [];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   isTheLastItem(item: BreadcrumbItem): boolean {
     const index = this.items.indexOf(item);

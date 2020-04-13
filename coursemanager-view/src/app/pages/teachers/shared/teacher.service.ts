@@ -6,7 +6,6 @@ import { Teacher } from './teacher.model';
   providedIn: 'root',
 })
 export class TeacherService extends BaseResourceService<Teacher> {
-
   constructor(protected injector: Injector) {
     super('teachers', injector, Teacher.fromJson);
   }

@@ -10,7 +10,13 @@ import { ServerErrorMessagesComponent } from './components/server-error-messages
 import { TableListComponent } from './components/table-list/table-list.component';
 
 @NgModule({
-  declarations: [BreadcrumbComponent, PageTitleComponent, FormFieldErrorComponent, ServerErrorMessagesComponent, TableListComponent],
+  declarations: [
+    BreadcrumbComponent,
+    PageTitleComponent,
+    FormFieldErrorComponent,
+    ServerErrorMessagesComponent,
+    TableListComponent,
+  ],
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   exports: [
     // shared modules

@@ -12,7 +12,7 @@ import { TeacherService } from '../shared/teacher.service';
 export class TeacherFormComponent extends BaseResourceFormComponent<Teacher> {
   constructor(
     protected injector: Injector,
-    protected teacherService: TeacherService
+    protected teacherService: TeacherService,
   ) {
     super(injector, new Teacher(), teacherService, Teacher.fromJson);
   }

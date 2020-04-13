@@ -1,23 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 interface MenuItem {
-  label: string,
-  link: string,
+  label: string;
+  link: string;
 }
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
   @Input() menus: MenuItem[] = [];
   @Input() pageTitle: string;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

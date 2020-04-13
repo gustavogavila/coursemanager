@@ -8,16 +8,14 @@ import { FormControl } from '@angular/forms';
       {{ errorMessage }}
     </div>
   `,
-  styleUrls: ['./form-field-error.component.css']
+  styleUrls: ['./form-field-error.component.css'],
 })
 export class FormFieldErrorComponent implements OnInit {
+  @Input() formControl: FormControl;
 
-  @Input('form-control') formControl: FormControl;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public get errorMessage(): string | null {
     return this.mustShowErrorMessage() ? this.getErrorMessage() : null;
@@ -29,18 +27,18 @@ export class FormFieldErrorComponent implements OnInit {
 
   private getErrorMessage() {
     if (this.formControl.errors.required) {
-      return 'dado obrigatório'
+      return 'dado obrigatório';
     }
     if (this.formControl.errors.email) {
-      return 'e-mail inválido'
+      return 'e-mail inválido';
     }
     if (this.formControl.errors.minlength) {
       const requiredLength = this.formControl.errors.minlength.requiredLength;
-      return `deve ter no mínimo ${requiredLength} caracteres`
+      return `deve ter no mínimo ${requiredLength} caracteres`;
     }
     if (this.formControl.errors.maxlength) {
       const requiredLength = this.formControl.errors.maxlength.requiredLength;
-      return `deve ter no máximo ${requiredLength} caracteres`
+      return `deve ter no máximo ${requiredLength} caracteres`;
     }
   }
 }

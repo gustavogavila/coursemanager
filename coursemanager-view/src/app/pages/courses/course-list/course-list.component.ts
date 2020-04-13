@@ -6,10 +6,9 @@ import { CourseService } from '../shared/course.service';
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.css']
+  styleUrls: ['./course-list.component.css'],
 })
 export class CourseListComponent extends BaseResourceListComponent<Course> {
-
   constructor(protected courseService: CourseService) {
     super(courseService);
   }

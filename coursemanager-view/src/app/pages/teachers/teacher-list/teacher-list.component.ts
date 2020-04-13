@@ -9,7 +9,6 @@ import { TeacherService } from '../shared/teacher.service';
   styleUrls: ['./teacher-list.component.css'],
 })
 export class TeacherListComponent extends BaseResourceListComponent<Teacher> {
-
   constructor(protected teacherService: TeacherService) {
     super(teacherService);
   }

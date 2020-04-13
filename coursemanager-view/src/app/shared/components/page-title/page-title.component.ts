@@ -3,19 +3,15 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-page-title',
   templateUrl: './page-title.component.html',
-  styleUrls: ['./page-title.component.css']
+  styleUrls: ['./page-title.component.css'],
 })
 export class PageTitleComponent implements OnInit {
-
-
   @Input() title: string;
   @Input() btnText: string;
   @Input() btnLink: string;
   @Input() btnStyle: string;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

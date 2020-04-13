@@ -4,7 +4,7 @@ export class Teacher extends BaseResourceModel {
   constructor(
     public name?: string,
     public email?: string,
-    public phone?: string
+    public phone?: string,
   ) {
     super();
   }

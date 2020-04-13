@@ -2,7 +2,6 @@ import { BaseResourceModel } from 'src/app/shared/models/base-resource.model';
 import { Teacher } from '../../teachers/shared/teacher.model';
 
 export class Course extends BaseResourceModel {
-
   constructor(
     public name?: string,
     public description?: string,

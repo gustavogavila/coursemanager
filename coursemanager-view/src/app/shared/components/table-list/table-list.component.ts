@@ -8,10 +8,9 @@ interface CustomField {
 @Component({
   selector: 'app-table-list',
   templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.css']
+  styleUrls: ['./table-list.component.css'],
 })
 export class TableListComponent implements OnInit {
-
   @Input() title: string;
   @Input() resources: any[];
   @Input() mainField: CustomField;
@@ -19,13 +18,11 @@ export class TableListComponent implements OnInit {
 
   @Output() deleteEvent = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   deleteResource(id: number): void {
     this.deleteEvent.emit(id);
   }
-
 }

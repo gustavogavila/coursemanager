@@ -24,7 +24,7 @@
           />
 
           <app-form-field-error
-            [form-control]="resourceForm.get('name')"
+            [formControl]="resourceForm.get('name')"
           ></app-form-field-error>
         </div>
       </div>
@@ -39,7 +39,7 @@
           />
 
           <app-form-field-error
-            [form-control]="resourceForm.get('email')"
+            [formControl]="resourceForm.get('email')"
           ></app-form-field-error>
         </div>
         <div class="form-group col-md-6">
@@ -56,7 +56,7 @@
   </div>
 
   <app-server-error-messages
-    [errors]="serverErrorMessages"
+    [serverErrorMessages]="serverErrorMessages"
   ></app-server-error-messages>
 
   <button

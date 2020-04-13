@@ -3,10 +3,9 @@ import { BaseResourceService } from 'src/app/shared/services/base-resource.servi
 import { Course } from './course.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CourseService extends BaseResourceService<Course> {
-
   constructor(protected injector: Injector) {
     super('courses', injector, Course.fromJson);
   }
