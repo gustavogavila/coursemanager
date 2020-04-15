@@ -39,7 +39,6 @@ public class Course implements Serializable {
 	@Column(name = "description")
 	private String description;
 	
-	@NotEmpty(message = "Preenchimento obrigatório")
 	@Column(name = "price", nullable = false)
 	private BigDecimal price;
 
