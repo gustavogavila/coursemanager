@@ -1,0 +1,15 @@
+<app-breadcrumb [items]="[{ label: 'Alunos' }]"></app-breadcrumb>
+
+<app-page-title
+  title="Alunos"
+  btnText="+ Novo"
+  btnLink="new"
+  btnStyle="success"
+></app-page-title>
+
+<app-table-list title="Aluno"
+  [resources]="resources"
+  [mainField]="{ label: 'Nome', value: 'name' }"
+  [otherFields]="[{ label: 'E-mail', value: 'email' }, { label: 'Telefone', value: 'phone' }]"
+  (deleteEvent)="deleteResource($event)"
+></app-table-list>
