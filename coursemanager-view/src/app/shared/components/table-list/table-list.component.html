@@ -29,6 +29,13 @@
         >
           Excluir
         </button>
+        <span *ngIf="haveModalAction()">
+          <span *ngFor="let modalAction of modalActions">
+            <button type="button" class="btn btn-outline-secondary btn-sm ml-2" data-toggle="modal" data-target="modalAction.target" >
+              {{ modalAction.btnTitle }}
+            </button>
+          </span>
+        </span>
       </td>
     </tr>
   </tbody>

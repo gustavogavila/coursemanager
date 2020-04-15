@@ -5,6 +5,11 @@ interface CustomField {
   value: any;
 }
 
+interface ModalAction {
+  btnTitle: string;
+  target: string;
+}
+
 @Component({
   selector: 'app-table-list',
   templateUrl: './table-list.component.html',
@@ -15,6 +20,7 @@ export class TableListComponent implements OnInit {
   @Input() resources: any[];
   @Input() mainField: CustomField;
   @Input() otherFields: CustomField[];
+  @Input() modalActions: ModalAction[];
 
   @Output() deleteEvent = new EventEmitter();
 
@@ -24,5 +30,9 @@ export class TableListComponent implements OnInit {
 
   deleteResource(id: number): void {
     this.deleteEvent.emit(id);
+  }
+
+  haveModalAction(): boolean {
+    return this.modalActions && this.modalActions.length > 0;
   }
 }
