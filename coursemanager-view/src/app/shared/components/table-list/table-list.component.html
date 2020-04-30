@@ -29,13 +29,12 @@
         >
           Excluir
         </button>
-        <span *ngIf="haveModalAction()">
-          <span *ngFor="let modalAction of modalActions">
-            <button type="button" class="btn btn-outline-secondary btn-sm ml-2" data-toggle="modal" data-target="modalAction.target" >
-              {{ modalAction.btnTitle }}
-            </button>
-          </span>
-        </span>
+        <button class="ml-2" *ngFor="let action of modalActions"
+          (click)=openModal(action.modalRef)
+          class="btn btn-outline-{{action.type}} btn-sm"
+        >
+          {{ action.name }}
+        </button>
       </td>
     </tr>
   </tbody>

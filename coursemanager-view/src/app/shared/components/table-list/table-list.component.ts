@@ -1,13 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
 interface CustomField {
   label: string;
   value: any;
 }
 
 interface ModalAction {
-  btnTitle: string;
-  target: string;
+  name: string;
+  type: string;
+  modalRef: TemplateRef<any>;
 }
 
 @Component({
@@ -16,15 +17,17 @@ interface ModalAction {
   styleUrls: ['./table-list.component.css'],
 })
 export class TableListComponent implements OnInit {
+
   @Input() title: string;
   @Input() resources: any[];
   @Input() mainField: CustomField;
   @Input() otherFields: CustomField[];
-  @Input() modalActions: ModalAction[];
 
   @Output() deleteEvent = new EventEmitter();
 
-  constructor() {}
+  @Input() modalActions: ModalAction[];
+
+  constructor(private modalService: BsModalService) {}
 
   ngOnInit(): void {}
 
@@ -32,7 +35,7 @@ export class TableListComponent implements OnInit {
     this.deleteEvent.emit(id);
   }
 
-  haveModalAction(): boolean {
-    return this.modalActions && this.modalActions.length > 0;
+  openModal(modalRef: TemplateRef<any>) {
+    this.modalService.show(modalRef);
   }
 }
